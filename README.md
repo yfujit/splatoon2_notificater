@@ -53,3 +53,30 @@ Default Parameters
 ```
 $ sls deploy --region us-east-1
 ```
+
+## How to develop in local environment
+If you develop this bot, Please install python-lambda-local and create credential.sh and configure WEBHOOK_URL and IKSM_SESSION.
+1. Install python-lambda-local and other package from requirement.txt
+    ```
+    $pip install -r requirements.txt
+    ```
+2. Check python-lambda-local command
+    ```
+    $python-lambda-local --version
+    ```
+3. Create credentials.sh and configure WEBHOOK_URL and IKSM_SESSION.
+    ```
+    $ cp credentials.sh.sample credentials.sh
+
+    $ vi credentials.sh
+    WEBHOOK_URL: SET_YOUR_SLACK_INCOMING_WEBHOOK_URL #Please Change
+    IKSM_SESSION: SET_YOUR_IKSM_SESSION #Please Change
+    ```
+4. Set Environment Variable to use credential.sh
+    ```
+    $source credential.sh
+    ```
+5. Local Exec(Sample)
+    ```
+    $python-lambda-local -f lambda_handler slack_notificater.py event.json
+    ```
