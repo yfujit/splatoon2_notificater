@@ -27,7 +27,7 @@ def format_message(data):
             {
                 'fallback': 'Detailed information on Splatoon Stage.',
                 'color': 'good',
-                'title': 'Stage Information at Ranked Battle from {} to {}'.format(datetime.datetime.fromtimestamp(notify_data['start_time']+3600*9), datetime.datetime.fromtimestamp(notify_data['end_time']+3600*9)),
+                'title': 'Stage Information at Ranked Battle from {} to {}'.format(datetime.datetime.fromtimestamp(notify_data['start_time']+3600*9).strftime("%H:%M"), datetime.datetime.fromtimestamp(notify_data['end_time']+3600*9).strftime("%H:%M")),
                 'fields': [
                     {
                         'title': 'Game Mode',
