@@ -54,3 +54,4 @@ Default Parameters
 $ sls deploy --region ap-northeast-1
 ```
 # splatoon2_notificater
+# splatoon2_notificater
