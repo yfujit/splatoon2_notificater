@@ -1,4 +1,6 @@
 node_modules
 credentials.yml
+credentials.sh
 .serverless
 .python-version
+__pycache__
