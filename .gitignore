@@ -1,0 +1,4 @@
+node_modules
+credentials.yml
+.serverless
+.python-version

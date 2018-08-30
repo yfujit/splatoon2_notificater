@@ -1,4 +1,4 @@
-# Splatoon Bot
+# splatoon2_notificater
 
 ### Automatically deployed components to AWS
 * [AWS Lambda](https://aws.amazon.com/lambda/)
@@ -53,6 +53,3 @@ Default Parameters
 ```
 $ sls deploy --region ap-northeast-1
 ```
-# splatoon2_notificater
-# splatoon2_notificater
-# splatoon2_notificater

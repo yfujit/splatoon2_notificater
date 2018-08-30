@@ -1,0 +1,24 @@
+service: schedule-notificater
+
+provider:
+  name: aws
+  runtime: python3.6
+  region: ${opt:region, self:custom.defaultRegion}
+
+plugins:
+  - serverless-python-requirements
+custom:
+  defaultRegion: ap-northeast-1
+  pythonRequirements:
+    dockerizePip: true
+  otherfile:
+    environment: ${file(./config/credentials.yml)}
+
+functions:
+  slack_notificater:
+    handler: slack_notificater.lambda_handler
+    events:
+      - schedule: cron(0 1,19,21,23 * * ? *)
+    environment:
+      WEBHOOK_URL: ${self:custom.otherfile.environment.WEBHOOK_URL}
+      IKSM_SESSION: ${self:custom.otherfile.environment.IKSM_SESSION}
