@@ -4,20 +4,20 @@ import time
 import datetime
 import urllib.request
 import sys
-
-import requirements
 import requests
 
-def schedules_format_message(data):
+def format_message(data):
     data = json.loads(data)
+    notify_data = {}
     now_datetime_str = datetime.datetime.now().strftime("%Y/%m/%d %H")
     now_datetime_formated = datetime.datetime.strptime(now_datetime_str,"%Y/%m/%d %H")
     start_time = int(time.mktime(now_datetime_formated.timetuple()))
     end_time = start_time - 7200 #2h unixtime
+    print(datetime.datetime.fromtimestamp(start_time))
 
     for match_data in data['league']:
         if match_data['start_time'] == start_time:
-          notify_data = match_data
+            notify_data = match_data
 
     payload = {
         'username': 'Splatoon Stage Notificater',
@@ -27,7 +27,7 @@ def schedules_format_message(data):
             {
                 'fallback': 'Detailed information on Splatoon Stage.',
                 'color': 'good',
-                'title': 'Stage Information at Ranked Battle from {} to {}'.format(datetime.datetime.fromtimestamp(notify_data['start_time']), datetime.datetime.fromtimestamp(notify_data['end_time'])),
+                'title': 'Stage Information at Ranked Battle from {} to {}'.format(datetime.datetime.fromtimestamp(notify_data['start_time']+3600*9), datetime.datetime.fromtimestamp(notify_data['end_time']+3600*9)),
                 'fields': [
                     {
                         'title': 'Game Mode',
@@ -77,6 +77,6 @@ def lambda_handler(event, context):
     webhook_url = os.environ['WEBHOOK_URL']
     iksm_session = os.environ['IKSM_SESSION']
     splatoon_information = get_splatoon_information("https://app.splatoon2.nintendo.net/api/schedules",iksm_session)
-    payload = schedules_format_message(splatoon_information)
+    payload = format_message(json.dumps(splatoon_information))
     response = notify_slack(webhook_url, payload)
     return response
