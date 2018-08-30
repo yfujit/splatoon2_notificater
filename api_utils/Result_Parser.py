@@ -8,7 +8,7 @@ class Result_Parser:
         self._header = ["battle_number", "my_team_result", "player_rank", 
                         "rule", "udemae", "estimate_gachi_power", 
                         "game_paint_point", "kill_count", "assist_count", 
-                        "death_count", "special_count"
+                        "death_count", "special_count", "stage", "weapon"
                         ]
         self._data = None
         self._data = self.parse_results(results_dict)
@@ -50,7 +50,8 @@ class Result_Parser:
         data_dict["assist_count"]     = str(player_result["assist_count"])
         data_dict["death_count"]      = str(player_result["death_count"])
         data_dict["special_count"]    = str(player_result["special_count"])
-                  
+        data_dict["stage"]            = result_dict["stage"]["name"]
+        data_dict["weapon"]           = player_result["player"]["weapon"]["name"]
         data_list = []
         for key in self._header:
             data_list.append(data_dict[key])
