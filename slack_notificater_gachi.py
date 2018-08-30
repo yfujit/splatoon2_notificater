@@ -10,25 +10,28 @@ def format_message(data):
     data = json.loads(data)
     notify_data = {}
     now_datetime_str = datetime.datetime.now().strftime("%Y/%m/%d %H")
+    print("now_datetime_str"+now_datetime_str)
     now_datetime_formated = datetime.datetime.strptime(now_datetime_str,"%Y/%m/%d %H")
     start_time = int(time.mktime(now_datetime_formated.timetuple()))
 
     start_time_mod7200 = start_time%7200
     if start_time_mod7200 == 0:
-        start_time = start_time
+      start_time = start_time
     else :
-        start_time = start_time -3600
+      start_time = start_time -3600
+
 
     end_time = start_time - 7200 #2h unixtime
     print(datetime.datetime.fromtimestamp(start_time))
 
-    for match_data in data['league']:
+    for match_data in data['gachi']:
         if match_data['start_time'] == start_time:
             notify_data = match_data
 
+
     payload = {
         'username': 'Splatoon Stage Notificater',
-        'icon_emoji': ':splatoon_icon_league:',
+        'icon_emoji': ':splatoon_icon_gachi:',
         'text': 'Splatoon Event Notification',
         'attachments': [
             {

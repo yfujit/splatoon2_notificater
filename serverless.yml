@@ -18,7 +18,14 @@ functions:
   slack_notificater:
     handler: slack_notificater.lambda_handler
     events:
-      - schedule: cron(0 1,19,21,23 * * ? *)
+      - schedule: cron(0 8,10,12,14,16 * * ? *)
+    environment:
+      WEBHOOK_URL: ${self:custom.otherfile.environment.WEBHOOK_URL}
+      IKSM_SESSION: ${self:custom.otherfile.environment.IKSM_SESSION}
+  slack_notificater_gachi:
+    handler: slack_notificater_gachi.lambda_handler
+    events:
+      - schedule: cron(0 8,10,12,14,16 * * ? *)
     environment:
       WEBHOOK_URL: ${self:custom.otherfile.environment.WEBHOOK_URL}
       IKSM_SESSION: ${self:custom.otherfile.environment.IKSM_SESSION}
